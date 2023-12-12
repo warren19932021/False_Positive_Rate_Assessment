@@ -23,6 +23,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
 
     G4Track * track =  aStep->GetTrack();
 
+    G4StepPoint * preStepPoint = aStep->GetPreStepPoint();
     G4StepPoint * postStepPoint = aStep->GetPostStepPoint();
 
     G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
@@ -43,6 +44,9 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
        // G4cout << "energyAtBoundary: " << energyAtBoundary << G4endl;
        // G4cout << "energyLoss: " << energyLoss << G4endl;
        // G4cout<<"Position: "<<postStepPoint->GetPosition()<<G4endl;
+
+        G4cout<<"volume name:"<<
+        preStepPoint->GetTouchableHandle()->GetVolume()->GetName()<<G4endl;
 
         analysisManager->FillNtupleDColumn(2, 0,energyAtBoundary);   
         analysisManager->AddNtupleRow(2);

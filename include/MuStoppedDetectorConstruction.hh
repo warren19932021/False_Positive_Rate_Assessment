@@ -16,9 +16,11 @@ public:
 private:
     G4Material * worldMat;
     G4Material * ConcreteMat;  
+    G4Material * ScintillatorMat;  
     void DefineMaterials();
     virtual void ConstructSDandField();
     G4LogicalVolume* logicalConcrete;
+    G4LogicalVolume* logicalScintillator;
 };
 
 #endif // MUSTOPPED_DETECTOR_CONSTRUCTION_HH
