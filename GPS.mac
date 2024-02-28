@@ -18,5 +18,5 @@
 /run/printProgress 100
 #/run_action/out_file_name Run0_150_50_150_Sn.root 
 
-/run/beamOn 1000
+/run/beamOn 100
 

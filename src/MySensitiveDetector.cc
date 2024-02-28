@@ -26,11 +26,21 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
     G4StepPoint * preStepPoint = aStep->GetPreStepPoint();
     G4StepPoint * postStepPoint = aStep->GetPostStepPoint();
 
+    // Get the volume where the hit occurred
+    G4VPhysicalVolume* volume = track->GetVolume();
+    // Get the logical volume of the hit
+    G4LogicalVolume* logicalVolume = volume->GetLogicalVolume();
+    G4String logicalVolumeName =  logicalVolume->GetName();
+
     G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
 
     // Check if the track is a primary muon (adjust track ID as needed)
     if (track->GetParentID() == 0 ) {
-      // Check if the step status is "GeomBoundary" (reached the boundary)
+
+
+    //if(logicalVolumeName=="logical_Scintillator1")
+    //G4cout << "logicalVolumeName: " << logicalVolumeName << G4endl;
+
       if (aStep->GetPostStepPoint()->GetStepStatus() == fGeomBoundary) {
   
         G4double initialEnergy = track->GetVertexKineticEnergy();
@@ -44,13 +54,46 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
        // G4cout << "energyAtBoundary: " << energyAtBoundary << G4endl;
        // G4cout << "energyLoss: " << energyLoss << G4endl;
        // G4cout<<"Position: "<<postStepPoint->GetPosition()<<G4endl;
-
-        G4cout<<"volume name:"<<
-        preStepPoint->GetTouchableHandle()->GetVolume()->GetName()<<G4endl;
-
         analysisManager->FillNtupleDColumn(2, 0,energyAtBoundary);   
         analysisManager->AddNtupleRow(2);
       
+        G4String PreStep_physVolumeName = preStepPoint->GetTouchableHandle()->GetVolume()->GetName();
+        G4String PostStep_physVolumeName = postStepPoint->GetTouchableHandle()->GetVolume()->GetName();
+        
+        //G4cout<<"PreStep_physVolumeName: "<< PreStep_physVolumeName<<"; "
+        //<<"PostStep_physVolumeName: "<< PostStep_physVolumeName
+        //<<G4endl;
+
+        G4int fFlag = 0;
+        G4int fFlag1 = 0;
+        G4int fFlag2 = 0;
+        G4int fFlag3 = 0;
+        G4int fFlag4 = 0;
+
+        if(PreStep_physVolumeName=="physScintillator1")
+          {
+            fFlag1 = 1;
+          } 
+        if(PreStep_physVolumeName=="physScintillator2")
+          {
+            fFlag2 = 1;
+          } 
+        if(PreStep_physVolumeName=="physScintillator3")
+          {
+            fFlag3 = 1;
+          } 
+        if (PreStep_physVolumeName=="physScintillator4")
+          {
+            fFlag4 = 1;
+          } 
+
+
+        analysisManager->FillNtupleIColumn(3, 0,fFlag);   
+        analysisManager->FillNtupleIColumn(3, 1,fFlag1);   
+        analysisManager->FillNtupleIColumn(3, 2,fFlag2);   
+        analysisManager->FillNtupleIColumn(3, 3,fFlag3);   
+        analysisManager->FillNtupleIColumn(3, 4,fFlag4);   
+        analysisManager->AddNtupleRow(3);
 
       }
     }

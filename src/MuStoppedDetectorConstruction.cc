@@ -19,7 +19,7 @@ MuStoppedDetectorConstruction::~MuStoppedDetectorConstruction()
 G4VPhysicalVolume* MuStoppedDetectorConstruction::Construct()
 {
 
-  G4Box* solidWorld = new G4Box("SolidWorld", 4.0 * m, 4.0 * m, 4.0 * m);
+  G4Box* solidWorld = new G4Box("SolidWorld", 10.0 * m, 10.0 * m, 10.0 * m);
   G4LogicalVolume* logicalWorld = new G4LogicalVolume(solidWorld, worldMat, "logicWorld");
   G4VPhysicalVolume* physWorld = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.), logicalWorld, "physWorld", 0, false, 0, true);
   
@@ -29,19 +29,34 @@ G4VPhysicalVolume* MuStoppedDetectorConstruction::Construct()
 
 
   //---- Concrete------
-  G4Box*  solidConcrete   =  new G4Box("solidConcrete",2.0*m,2.0*m,100.0*cm); 
-  logicalConcrete = new G4LogicalVolume(solidConcrete, ConcreteMat, "logical_concrete");
-  G4VPhysicalVolume* physConcrete = new G4PVPlacement(0, G4ThreeVector(0.,0.,200.*cm), logicalConcrete, "physConcrete", logicalWorld, false, 0, true);
+  //G4Box*  solidConcrete   =  new G4Box("solidConcrete",2.0*m,2.0*m,100.0*cm); 
+  //logicalConcrete = new G4LogicalVolume(solidConcrete, ConcreteMat, "logical_concrete");
+  //G4VPhysicalVolume* physConcrete = new G4PVPlacement(0, G4ThreeVector(0.,0.,200.*cm), logicalConcrete, "physConcrete", logicalWorld, false, 0, true);
   
   //---- Scintillator------
-  G4Box*  solidScintillator  =  new G4Box("solidScintillator",2.0*m,2.0*m,80.0*cm); 
-  logicalScintillator = new G4LogicalVolume(solidScintillator, ScintillatorMat, "logical_Scintillator");
-  G4VPhysicalVolume* physScintillator = new G4PVPlacement(0, G4ThreeVector(0.,0.,0.*cm), logicalScintillator, "physScintillator", logicalWorld, false, 0, true);
+  G4Box*  solidScintillator  =  new G4Box("solidScintillator",1.0*m,1.0*m,2.5*cm); 
+  G4Box*  solidScintillator_small  =  new G4Box("solidScintillator_small",5.0*cm,5.0*cm,0.5*mm); 
+  
+  logicalScintillator1 = new G4LogicalVolume(solidScintillator, ScintillatorMat, "logical_Scintillator1");
+  G4VPhysicalVolume* physScintillator1 = new G4PVPlacement(0, G4ThreeVector(0.,0.,-2.5*cm), logicalScintillator1, "physScintillator1", logicalWorld, false, 0, true);
+  logicalScintillator2 = new G4LogicalVolume(solidScintillator, ScintillatorMat, "logical_Scintillator2");
+  G4VPhysicalVolume* physScintillator2 = new G4PVPlacement(0, G4ThreeVector(0.,0.,20.*cm), logicalScintillator2, "physScintillator2", logicalWorld, false, 0, true);
+  logicalScintillator3 = new G4LogicalVolume(solidScintillator, ScintillatorMat, "logical_Scintillator3");
+  G4VPhysicalVolume* physScintillator3 = new G4PVPlacement(0, G4ThreeVector(0.,0.,30.*cm), logicalScintillator3, "physScintillator3", logicalWorld, false, 0, true);
+
+  logicalScintillator4 = new G4LogicalVolume(solidScintillator_small, ScintillatorMat, "logical_Scintillator4");
+  G4VPhysicalVolume* physScintillator4 = new G4PVPlacement(0, G4ThreeVector(0.,0.,5.*cm), logicalScintillator4, "physScintillator4", logicalWorld, false, 0, true);
+
+  // Create a rotation matrix for a 90 degree rotation around the Y-axis
+  G4RotationMatrix* rotationMatrix = new G4RotationMatrix();
+  rotationMatrix->rotateY(45. * deg); // Rotate by 90 degrees
+  // Apply the rotation to the physical volume
+  physScintillator4->SetRotation(rotationMatrix);
+
 
   // Set visualization attributes
   G4VisAttributes* concreteVisAttributes = new G4VisAttributes(G4Color(0.6, 0.6, 0.6, 0.8)); // gray, opacity 0.8
-
-  logicalConcrete->SetVisAttributes(concreteVisAttributes);
+  //logicalConcrete->SetVisAttributes(concreteVisAttributes);
 
 
   return physWorld;
@@ -61,7 +76,10 @@ void MuStoppedDetectorConstruction::ConstructSDandField()
 {
 
     senDet = new MySensitiveDetector("SensitiveDetector");
-    logicalConcrete->SetSensitiveDetector(senDet);
-    logicalScintillator->SetSensitiveDetector(senDet);
+    //logicalConcrete->SetSensitiveDetector(senDet);
+    logicalScintillator1->SetSensitiveDetector(senDet);
+    logicalScintillator2->SetSensitiveDetector(senDet);
+    logicalScintillator3->SetSensitiveDetector(senDet);
+    logicalScintillator4->SetSensitiveDetector(senDet);
 
 }    
