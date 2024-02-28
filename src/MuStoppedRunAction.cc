@@ -19,12 +19,10 @@ MuStoppedRunAction::MuStoppedRunAction()
   analysisManager->FinishNtuple(2);
 
   analysisManager->CreateNtuple("Flag", "The flag to differentiate which scintillator the muon passed through");
-  //1,2,3,4 ==> scintillator1,scintillator2,scintillator3,scintillator4
-  analysisManager->CreateNtupleIColumn("Flag0");    //column 0; 
-  analysisManager->CreateNtupleIColumn("Flag1");    //column 1; 
-  analysisManager->CreateNtupleIColumn("Flag2");    //column 2; 
-  analysisManager->CreateNtupleIColumn("Flag3");    //column 3; 
-  analysisManager->CreateNtupleIColumn("Flag4");    //column 4; 
+  //1,2,3 ==> scintillator1,scintillator2,scintillator3
+  analysisManager->CreateNtupleIColumn("Flag1");    //column 0; 
+  analysisManager->CreateNtupleIColumn("Flag2");    //column 1; 
+  analysisManager->CreateNtupleIColumn("Flag3");    //column 2; 
   analysisManager->FinishNtuple(3);
 
 }

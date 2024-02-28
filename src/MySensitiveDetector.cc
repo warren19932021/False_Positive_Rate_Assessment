@@ -28,8 +28,9 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
 
     // Get the volume where the hit occurred
     G4VPhysicalVolume* volume = track->GetVolume();
-    // Get the logical volume of the hit
     G4LogicalVolume* logicalVolume = volume->GetLogicalVolume();
+   
+    // Get the logical volume of the hit
     G4String logicalVolumeName =  logicalVolume->GetName();
 
     G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
@@ -64,11 +65,9 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
         //<<"PostStep_physVolumeName: "<< PostStep_physVolumeName
         //<<G4endl;
 
-        G4int fFlag = 0;
         G4int fFlag1 = 0;
         G4int fFlag2 = 0;
         G4int fFlag3 = 0;
-        G4int fFlag4 = 0;
 
         if(PreStep_physVolumeName=="physScintillator1")
           {
@@ -82,17 +81,11 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
           {
             fFlag3 = 1;
           } 
-        if (PreStep_physVolumeName=="physScintillator4")
-          {
-            fFlag4 = 1;
-          } 
 
 
-        analysisManager->FillNtupleIColumn(3, 0,fFlag);   
-        analysisManager->FillNtupleIColumn(3, 1,fFlag1);   
-        analysisManager->FillNtupleIColumn(3, 2,fFlag2);   
-        analysisManager->FillNtupleIColumn(3, 3,fFlag3);   
-        analysisManager->FillNtupleIColumn(3, 4,fFlag4);   
+        analysisManager->FillNtupleIColumn(3, 0,fFlag1);   
+        analysisManager->FillNtupleIColumn(3, 1,fFlag2);   
+        analysisManager->FillNtupleIColumn(3, 2,fFlag3);   
         analysisManager->AddNtupleRow(3);
 
       }

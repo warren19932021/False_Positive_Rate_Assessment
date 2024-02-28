@@ -23,7 +23,6 @@ private:
     G4LogicalVolume* logicalScintillator1;
     G4LogicalVolume* logicalScintillator2;
     G4LogicalVolume* logicalScintillator3;
-    G4LogicalVolume* logicalScintillator4;
 };
 
 #endif // MUSTOPPED_DETECTOR_CONSTRUCTION_HH
