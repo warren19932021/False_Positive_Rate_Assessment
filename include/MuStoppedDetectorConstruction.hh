@@ -12,8 +12,9 @@ public:
   virtual ~MuStoppedDetectorConstruction();
 
   virtual G4VPhysicalVolume* Construct();
-  MySensitiveDetector* senDet;
+  MySensitiveDetector* GetSenDet();
 private:
+  MySensitiveDetector* senDet;
     G4Material * worldMat;
     G4Material * ConcreteMat;  
     G4Material * ScintillatorMat;  

@@ -10,11 +10,22 @@
 
 MuStoppedDetectorConstruction::MuStoppedDetectorConstruction()
 {
-   DefineMaterials();
+  DefineMaterials();
+  senDet = new MySensitiveDetector("SensitiveDetector"); // I guess we can move this into the constructor
 }
 
 MuStoppedDetectorConstruction::~MuStoppedDetectorConstruction()
 {}
+
+MySensitiveDetector* MuStoppedDetectorConstruction::GetSenDet()
+{
+  if (!senDet) {
+    G4cout << "There is no sensitive detector yet!" << G4endl;
+    return 0;
+  } else {
+    return senDet;
+  }
+}
 
 G4VPhysicalVolume* MuStoppedDetectorConstruction::Construct()
 {
@@ -66,17 +77,18 @@ void MuStoppedDetectorConstruction::DefineMaterials()
     G4NistManager * nist = G4NistManager::Instance();
     worldMat = nist->FindOrBuildMaterial("G4_AIR");
     ConcreteMat = nist->FindOrBuildMaterial("G4_CONCRETE");
-    ScintillatorMat = nist->FindOrBuildMaterial("G4_CONCRETE");
+    ScintillatorMat = nist->FindOrBuildMaterial("G4_POLYSTYRENE");
 }    
 
 
 void MuStoppedDetectorConstruction::ConstructSDandField()
 {
-
-    senDet = new MySensitiveDetector("SensitiveDetector");
+  
+    G4cout<<"This is Step 1 MuStoppedDetectorConstruction::ConstructSDandField"<<G4endl; 
     //logicalConcrete->SetSensitiveDetector(senDet);
     logicalScintillator1->SetSensitiveDetector(senDet);
     logicalScintillator2->SetSensitiveDetector(senDet);
     logicalScintillator3->SetSensitiveDetector(senDet);
+    G4cout<<"This is Step 2 MuStoppedDetectorConstruction::ConstructSDandField"<<G4endl; 
 
 }    

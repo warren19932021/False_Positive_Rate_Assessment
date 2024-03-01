@@ -18,12 +18,20 @@ MuStoppedRunAction::MuStoppedRunAction()
   analysisManager->CreateNtupleDColumn("Eboundary");    //column 0
   analysisManager->FinishNtuple(2);
 
-  analysisManager->CreateNtuple("Flag", "The flag to differentiate which scintillator the muon passed through");
-  //1,2,3 ==> scintillator1,scintillator2,scintillator3
+  analysisManager->CreateNtuple("Flag", "The flag to differentiate which scintillator the muon hit");
+  //Flag1,2,3 ==> scintillator1,scintillator2,scintillator3
   analysisManager->CreateNtupleIColumn("Flag1");    //column 0; 
   analysisManager->CreateNtupleIColumn("Flag2");    //column 1; 
   analysisManager->CreateNtupleIColumn("Flag3");    //column 2; 
   analysisManager->FinishNtuple(3);
+
+  analysisManager->CreateNtuple("Pass", "The variable is used to differentiate scintillators the muon passed through");
+  //Passed3==> muon passed scintillator3; Passed3==> muon passed both scintillator3 and scintillator2;
+  analysisManager->CreateNtupleIColumn("Passed3");    //column 0; 
+  //analysisManager->CreateNtupleIColumn("Passed32");    //column 1; 
+  //analysisManager->CreateNtupleIColumn("Passed321");    //column 2; 
+  analysisManager->FinishNtuple(4);
+
 
 }
 

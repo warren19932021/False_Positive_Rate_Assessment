@@ -5,6 +5,7 @@
 
 #include "MuStoppedActionInitialization.hh"
 #include "MuStoppedDetectorConstruction.hh"
+#include "MySensitiveDetector.hh"
 #include "QBBC.hh"
 
 int main(int argc, char** argv)
@@ -26,8 +27,9 @@ int main(int argc, char** argv)
   G4VModularPhysicsList* physicsList = new QBBC;
   physicsList->SetVerboseLevel(1);
   runManager->SetUserInitialization(physicsList);
-
-  runManager->SetUserInitialization(new MuStoppedActionInitialization);
+  MuStoppedActionInitialization* action = new MuStoppedActionInitialization();
+  action->SetSensitiveDetector(detectorConstruction->GetSenDet());
+  runManager->SetUserInitialization(action);
 
   // Initialize visualization
   G4VisManager* visManager = new G4VisExecutive;

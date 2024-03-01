@@ -3,6 +3,7 @@
 #include "MuStoppedRunAction.hh"
 #include "MuStoppedEventAction.hh"
 #include "MuStoppedTrackingAction.hh"
+#include "MySensitiveDetector.hh"
 
 MuStoppedActionInitialization::MuStoppedActionInitialization()
 : G4VUserActionInitialization()
@@ -11,12 +12,21 @@ MuStoppedActionInitialization::MuStoppedActionInitialization()
 MuStoppedActionInitialization::~MuStoppedActionInitialization()
 {}
 
+void MuStoppedActionInitialization::SetSensitiveDetector(MySensitiveDetector* senDet)
+{
+  sensitiveDetector = senDet;
+}
 
 void MuStoppedActionInitialization::Build() const
 {
   SetUserAction(new MuStoppedPrimaryGeneratorAction);
+  
   SetUserAction(new MuStoppedRunAction);
-  SetUserAction(new MuStoppedEventAction);
+  
+  MuStoppedEventAction* eventAction = new MuStoppedEventAction;
+  SetUserAction(eventAction);
+  sensitiveDetector->SetEventAction(eventAction);
+  
   SetUserAction(new MuStoppedTrackingAction);
 }
 
