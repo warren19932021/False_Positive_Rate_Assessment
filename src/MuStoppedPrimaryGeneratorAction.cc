@@ -43,7 +43,7 @@ MuStoppedPrimaryGeneratorAction::MuStoppedPrimaryGeneratorAction()
   mu_minus(NULL)
 {
   fMuonGen.SetUseHSphere(); // half-spherical surface generation
-  fMuonGen.SetHSphereRadius(110.*CLHEP::cm); // half-sphere radius
+  fMuonGen.SetHSphereRadius(4.*CLHEP::m); // half-sphere radius
   // (x,y,z) position of the center of the half-sphere
   fMuonGen.SetHSphereCenterPosition({{0., 0., 0.*CLHEP::cm}});
   fMuonGen.SetDifferentialFlux(&J);

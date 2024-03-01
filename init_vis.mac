@@ -4,6 +4,7 @@
 # Set some default verbose
 /control/verbose 2
 /control/saveHistory
+#/vis/viewer/set/upVector 0 0 1
 /run/verbose 2
 #
 # Change the default number of threads (in multi-threaded mode)
