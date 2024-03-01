@@ -18,18 +18,18 @@ MuStoppedRunAction::MuStoppedRunAction()
   analysisManager->CreateNtupleDColumn("Eboundary");    //column 0
   analysisManager->FinishNtuple(2);
 
-  analysisManager->CreateNtuple("Flag", "The flag to differentiate which scintillator the muon hit");
+  analysisManager->CreateNtuple("Flag", "The flag to differentiate which scintillator the muon hit for a specific hit");
   //Flag1,2,3 ==> scintillator1,scintillator2,scintillator3
   analysisManager->CreateNtupleIColumn("Flag1");    //column 0; 
   analysisManager->CreateNtupleIColumn("Flag2");    //column 1; 
   analysisManager->CreateNtupleIColumn("Flag3");    //column 2; 
   analysisManager->FinishNtuple(3);
 
-  analysisManager->CreateNtuple("Pass", "The variable is used to differentiate scintillators the muon passed through");
-  //Passed3==> muon passed scintillator3; Passed3==> muon passed both scintillator3 and scintillator2;
-  analysisManager->CreateNtupleIColumn("Passed3");    //column 0; 
-  //analysisManager->CreateNtupleIColumn("Passed32");    //column 1; 
-  //analysisManager->CreateNtupleIColumn("Passed321");    //column 2; 
+  analysisManager->CreateNtuple("GotHit", "The variable is used to differentiate scintillators the muon passed through");
+  //GotHit1==> muon hit scintillator1; GotHit2==> muon hit scintillator2; GotHit3==> muon hit scintillator3;   
+  analysisManager->CreateNtupleIColumn("GotHit1");    //column 0; 
+  analysisManager->CreateNtupleIColumn("GotHit2");    //column 1; 
+  analysisManager->CreateNtupleIColumn("GotHit3");    //column 2; 
   analysisManager->FinishNtuple(4);
 
 

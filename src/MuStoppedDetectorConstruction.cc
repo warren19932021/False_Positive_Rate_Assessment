@@ -45,16 +45,16 @@ G4VPhysicalVolume* MuStoppedDetectorConstruction::Construct()
   //G4VPhysicalVolume* physConcrete = new G4PVPlacement(0, G4ThreeVector(0.,0.,200.*cm), logicalConcrete, "physConcrete", logicalWorld, false, 0, true);
   
   //---- Scintillator------
-  G4Box*  solidScintillator  =  new G4Box("solidScintillator",0.5*m,0.5*m,2.5*cm); 
-  G4Box*  solidScintillator_small  =  new G4Box("solidScintillator_small",10.*cm,10.*cm,1.5*cm); 
+  G4Box*  solidScintillator  =  new G4Box("solidScintillator",0.5*m,0.5*m,3.0*cm); 
+  G4Box*  solidScintillator_small  =  new G4Box("solidScintillator_small",10.*cm,10.*cm,0.75*cm); 
   
   logicalScintillator1 = new G4LogicalVolume(solidScintillator, ScintillatorMat, "logical_Scintillator1");
-  G4VPhysicalVolume* physScintillator1 = new G4PVPlacement(0, G4ThreeVector(0.,0.,-2.5*cm), logicalScintillator1, "physScintillator1", logicalWorld, false, 0, true);
+  G4VPhysicalVolume* physScintillator1 = new G4PVPlacement(0, G4ThreeVector(0.,0.,-3.0*cm), logicalScintillator1, "physScintillator1", logicalWorld, false, 0, true);
 
   logicalScintillator2 = new G4LogicalVolume(solidScintillator_small, ScintillatorMat, "logical_Scintillator2");
-  G4VPhysicalVolume* physScintillator2 = new G4PVPlacement(0, G4ThreeVector(0.,0.,(22.7+1.5)*cm), logicalScintillator2, "physScintillator2", logicalWorld, false, 0, true);
+  G4VPhysicalVolume* physScintillator2 = new G4PVPlacement(0, G4ThreeVector(0.,0.,(22.7+0.75)*cm), logicalScintillator2, "physScintillator2", logicalWorld, false, 0, true);
   logicalScintillator3 = new G4LogicalVolume(solidScintillator_small, ScintillatorMat, "logical_Scintillator3");
-  G4VPhysicalVolume* physScintillator3 = new G4PVPlacement(0, G4ThreeVector(0.,0.,(22.7+1.5+3.1)*cm), logicalScintillator3, "physScintillator3", logicalWorld, false, 0, true);
+  G4VPhysicalVolume* physScintillator3 = new G4PVPlacement(0, G4ThreeVector(0.,0.,(22.7+0.75+1.5+0.1)*cm), logicalScintillator3, "physScintillator3", logicalWorld, false, 0, true);
 
 //  // Create a rotation matrix for a 90 degree rotation around the Y-axis
 //  G4RotationMatrix* rotationMatrix = new G4RotationMatrix();

@@ -5,6 +5,8 @@
 
 MuStoppedEventAction::MuStoppedEventAction(): G4UserEventAction()
 ,fScintillator1GotHit(0)
+,fScintillator2GotHit(0)
+,fScintillator3GotHit(0)
 {
       
     G4cout<<"This is MuStoppedEventAction::MuStoppedEventAction"<<G4endl;
@@ -19,7 +21,7 @@ MuStoppedEventAction::~MuStoppedEventAction()
 
 void MuStoppedEventAction::BeginOfEventAction(const G4Event* evt)
 {
-    G4cout<<"This is MuStoppedEventAction::BeginOfEventAction"<<G4endl;
+   // G4cout<<"This is MuStoppedEventAction::BeginOfEventAction"<<G4endl;
 
   // Add code to be executed at the beginning of each event
   G4double Ekin = evt->GetPrimaryVertex()->GetPrimary()->GetKineticEnergy();
@@ -37,18 +39,27 @@ void MuStoppedEventAction::BeginOfEventAction(const G4Event* evt)
 
 void MuStoppedEventAction::EndOfEventAction(const G4Event*)
 {
-    G4cout<<"This is MuStoppedEventAction::EndOfEventAction"<<G4endl;
+    //G4cout<<"This is MuStoppedEventAction::EndOfEventAction"<<G4endl;
 
   // Add code to be executed at the end of each event
 
   // TODO: Evaluate which detectors were hit.
-  G4cout<<"fScintillator1GotHit: "<<fScintillator1GotHit<<G4endl; 
+  //G4cout<<"fScintillator1GotHit: "<<fScintillator1GotHit<<G4endl; 
+  //G4cout<<"fScintillator2GotHit: "<<fScintillator2GotHit<<G4endl; 
+  //G4cout<<"fScintillator3GotHit: "<<fScintillator3GotHit<<G4endl; 
+  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+
+
+  analysisManager->FillNtupleIColumn(4, 0,fScintillator1GotHit);   
+  analysisManager->FillNtupleIColumn(4, 1,fScintillator2GotHit);   
+  analysisManager->FillNtupleIColumn(4, 2,fScintillator3GotHit);   
+  analysisManager->AddNtupleRow(4);
 
 }
 
 void MuStoppedEventAction::SetScintillator1GotHit(G4int Scintillator1GotHit)
 {
-    G4cout<<"This is MuStoppedEventAction::SetScintillator1GotHit"<<G4endl;
+    //G4cout<<"This is MuStoppedEventAction::SetScintillator1GotHit"<<G4endl;
     
     fScintillator1GotHit = Scintillator1GotHit;
 

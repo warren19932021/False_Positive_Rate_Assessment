@@ -22,13 +22,13 @@ MuStoppedTrackingAction::~MuStoppedTrackingAction()
 void MuStoppedTrackingAction::PreUserTrackingAction(const G4Track*)
 {
   // Add code to be executed before tracking a particle
-     G4cout<<"This is MuStoppedTrackingAction::PreUserTrackingAction"<<G4endl;
+    // G4cout<<"This is MuStoppedTrackingAction::PreUserTrackingAction"<<G4endl;
 
 }
 
 void MuStoppedTrackingAction::PostUserTrackingAction(const G4Track* track)
 {
-     G4cout<<"This is MuStoppedTrackingAction::PostUserTrackingAction"<<G4endl;
+   //  G4cout<<"This is MuStoppedTrackingAction::PostUserTrackingAction"<<G4endl;
 }
 
 /*

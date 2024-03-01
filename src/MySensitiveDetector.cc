@@ -27,7 +27,7 @@ void MySensitiveDetector::SetEventAction(MuStoppedEventAction* evtAction)
 G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROhist)//
 {
 
-     G4cout<<"This is MySensitiveDetector::ProcessHits"<<G4endl;
+    // G4cout<<"This is MySensitiveDetector::ProcessHits"<<G4endl;
 
     // Get the G4RunManager instance
     G4RunManager* runManager = G4RunManager::GetRunManager();
