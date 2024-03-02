@@ -8,6 +8,7 @@
 #include "MySensitiveDetector.hh"
 #include "QBBC.hh"
 
+
 int main(int argc, char** argv)
 {
   // Detect interactive mode (if no arguments) and define UI session
@@ -15,6 +16,8 @@ int main(int argc, char** argv)
   if (argc == 1) {
     ui = new G4UIExecutive(argc, argv);
   }
+
+
 
   // Construct the run manager
   G4RunManager* runManager = new G4RunManager;

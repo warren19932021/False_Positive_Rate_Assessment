@@ -51,10 +51,17 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
     // Check if the track is a primary muon (adjust track ID as needed)
     if (track->GetParentID() == 0 ) {
 
+        //G4String PreStep_physVolumeName = preStepPoint->GetTouchableHandle()->GetVolume()->GetName();
+        //G4String PostStep_physVolumeName = postStepPoint->GetTouchableHandle()->GetVolume()->GetName();
+        //G4cout<<"PreStep_physVolumeName: "<< PreStep_physVolumeName<<"; "
+        //<<"PostStep_physVolumeName: "<< PostStep_physVolumeName
+        //<<G4endl;
 
     //if(logicalVolumeName=="logical_Scintillator1")
     //G4cout << "logicalVolumeName: " << logicalVolumeName << G4endl;
 
+
+      //if (postStepPoint->GetStepStatus() == fGeomBoundary) {
       if (preStepPoint->GetStepStatus() == fGeomBoundary) {
   
         G4double initialEnergy = track->GetVertexKineticEnergy();
@@ -74,15 +81,15 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
         G4String PreStep_physVolumeName = preStepPoint->GetTouchableHandle()->GetVolume()->GetName();
         G4String PostStep_physVolumeName = postStepPoint->GetTouchableHandle()->GetVolume()->GetName();
         
-        //G4cout<<"PreStep_physVolumeName: "<< PreStep_physVolumeName<<"; "
-        //<<"PostStep_physVolumeName: "<< PostStep_physVolumeName
-        //<<G4endl;
+        G4cout<<"PreStep_physVolumeName: "<< PreStep_physVolumeName<<"; "
+        <<"PostStep_physVolumeName: "<< PostStep_physVolumeName
+        <<G4endl;
 
         G4int fFlag1 = 0;
         G4int fFlag2 = 0;
         G4int fFlag3 = 0;
 
-        if(PostStep_physVolumeName=="physScintillator1")
+        if(PreStep_physVolumeName=="physScintillator1"&&(PostStep_physVolumeName=="physScintillator1"||PostStep_physVolumeName=="physWorld"))
         //muon hit Scintillator 1, does not mean (or we say, we don't know it will) pass through Scintillator 1
           {
             fFlag1 = 1;
@@ -90,14 +97,16 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
             // Is there something like ActionClassHandler::GetEventAction?
              eventAction->SetScintillator1GotHit(1);
           } 
-        if(PostStep_physVolumeName=="physScintillator2")
+        //if(PostStep_physVolumeName=="physScintillator2")
+        if(PreStep_physVolumeName=="physScintillator2"&&(PostStep_physVolumeName=="physScintillator2"||PostStep_physVolumeName=="physWorld"))
           {
             fFlag2 = 1;
             // same...
              eventAction->SetScintillator2GotHit(1);
 
           } 
-        if(PostStep_physVolumeName=="physScintillator3")
+        //if(PostStep_physVolumeName=="physScintillator3")
+        if(PreStep_physVolumeName=="physScintillator3"&&(PostStep_physVolumeName=="physScintillator3"||PostStep_physVolumeName=="physWorld"))
           {
             fFlag3 = 1;
              eventAction->SetScintillator3GotHit(1);

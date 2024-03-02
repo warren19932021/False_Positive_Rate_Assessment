@@ -21,6 +21,11 @@ MuStoppedEventAction::~MuStoppedEventAction()
 
 void MuStoppedEventAction::BeginOfEventAction(const G4Event* evt)
 {
+
+fScintillator1GotHit=0;
+fScintillator2GotHit=0;
+fScintillator3GotHit=0;
+
    // G4cout<<"This is MuStoppedEventAction::BeginOfEventAction"<<G4endl;
 
   // Add code to be executed at the beginning of each event

@@ -1,5 +1,7 @@
 #include "MuStoppedPrimaryGeneratorAction.hh"
 #include "G4ParticleTable.hh"
+#include "Randomize.hh"
+
 
 /*
 double J(double p, double theta) {
@@ -63,7 +65,13 @@ MuStoppedPrimaryGeneratorAction::~MuStoppedPrimaryGeneratorAction()
 
 void MuStoppedPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-   fMuonGen.GenerateFromCustomJ(); // generate from user-defined J
+
+  // Define and initialize the seed
+  long seed = 12345; // Choose any integer value
+  // Set a random seed
+  G4Random::setTheSeed(seed);
+  
+  fMuonGen.GenerateFromCustomJ(); // generate from user-defined J
    //fMuonGen.Generate();
    std::array<double,3> muon_pos = fMuonGen.GetGenerationPosition();
    //G4ThreeVector muon_pos = fMuonGen.GetGenerationPosition();
