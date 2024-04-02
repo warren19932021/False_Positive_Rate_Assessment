@@ -38,7 +38,9 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
 
     G4StepPoint * preStepPoint = aStep->GetPreStepPoint();
     G4StepPoint * postStepPoint = aStep->GetPostStepPoint();
+    
 
+ 
     // Get the volume where the hit occurred
     G4VPhysicalVolume* volume = track->GetVolume();
     G4LogicalVolume* logicalVolume = volume->GetLogicalVolume();
@@ -80,16 +82,18 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
       
         G4String PreStep_physVolumeName = preStepPoint->GetTouchableHandle()->GetVolume()->GetName();
         G4String PostStep_physVolumeName = postStepPoint->GetTouchableHandle()->GetVolume()->GetName();
-        
-        G4cout<<"PreStep_physVolumeName: "<< PreStep_physVolumeName<<"; "
-        <<"PostStep_physVolumeName: "<< PostStep_physVolumeName
-        <<G4endl;
+
+        //G4cout<<"PreStep_physVolumeName: "<< PreStep_physVolumeName<<"; "
+        //<<"PostStep_physVolumeName: "<< PostStep_physVolumeName
+        //<<G4endl;
 
         G4int fFlag1 = 0;
         G4int fFlag2 = 0;
         G4int fFlag3 = 0;
+        //G4double fMomentum = -1;
 
-        if(PreStep_physVolumeName=="physScintillator1"&&(PostStep_physVolumeName=="physScintillator1"||PostStep_physVolumeName=="physWorld"))
+        //if(PreStep_physVolumeName=="physScintillator1"&&(PostStep_physVolumeName=="physScintillator1"||PostStep_physVolumeName=="physWorld"))
+        if(PreStep_physVolumeName=="physScintillator1")
         //muon hit Scintillator 1, does not mean (or we say, we don't know it will) pass through Scintillator 1
           {
             fFlag1 = 1;
@@ -98,7 +102,8 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
              eventAction->SetScintillator1GotHit(1);
           } 
         //if(PostStep_physVolumeName=="physScintillator2")
-        if(PreStep_physVolumeName=="physScintillator2"&&(PostStep_physVolumeName=="physScintillator2"||PostStep_physVolumeName=="physWorld"))
+        //if(PreStep_physVolumeName=="physScintillator2"&&(PostStep_physVolumeName=="physScintillator2"||PostStep_physVolumeName=="physWorld"))
+        if(PreStep_physVolumeName=="physScintillator2")
           {
             fFlag2 = 1;
             // same...
@@ -106,11 +111,14 @@ G4bool MySensitiveDetector::ProcessHits(G4Step * aStep, G4TouchableHistory * ROh
 
           } 
         //if(PostStep_physVolumeName=="physScintillator3")
-        if(PreStep_physVolumeName=="physScintillator3"&&(PostStep_physVolumeName=="physScintillator3"||PostStep_physVolumeName=="physWorld"))
+        //if(PreStep_physVolumeName=="physScintillator3"&&(PostStep_physVolumeName=="physScintillator3"||PostStep_physVolumeName=="physWorld"))
+        if(PreStep_physVolumeName=="physScintillator3")
           {
-            fFlag3 = 1;
+             fFlag3 = 1;
              eventAction->SetScintillator3GotHit(1);
-            
+             //fMomentum = 0.001*((preStepPoint->GetMomentum()).mag());
+             //G4cout<<"preStepPoint Momentum(): "<<  0.001*((preStepPoint->GetMomentum()).mag())<<G4endl;
+             eventAction->SetScintillator3Momentum( 0.001*((preStepPoint->GetMomentum()).mag()) );
           } 
 
 

@@ -7,6 +7,7 @@ MuStoppedEventAction::MuStoppedEventAction(): G4UserEventAction()
 ,fScintillator1GotHit(0)
 ,fScintillator2GotHit(0)
 ,fScintillator3GotHit(0)
+,fSetScintillator3Momentum(-1)
 {
       
     G4cout<<"This is MuStoppedEventAction::MuStoppedEventAction"<<G4endl;
@@ -25,6 +26,7 @@ void MuStoppedEventAction::BeginOfEventAction(const G4Event* evt)
 fScintillator1GotHit=0;
 fScintillator2GotHit=0;
 fScintillator3GotHit=0;
+fSetScintillator3Momentum=-1;
 
    // G4cout<<"This is MuStoppedEventAction::BeginOfEventAction"<<G4endl;
 
@@ -58,6 +60,7 @@ void MuStoppedEventAction::EndOfEventAction(const G4Event*)
   analysisManager->FillNtupleIColumn(4, 0,fScintillator1GotHit);   
   analysisManager->FillNtupleIColumn(4, 1,fScintillator2GotHit);   
   analysisManager->FillNtupleIColumn(4, 2,fScintillator3GotHit);   
+  analysisManager->FillNtupleDColumn(4, 3,fSetScintillator3Momentum);   
   analysisManager->AddNtupleRow(4);
 
 }
@@ -81,5 +84,12 @@ void MuStoppedEventAction::SetScintillator3GotHit(G4int Scintillator3GotHit)
 {
     
     fScintillator3GotHit = Scintillator3GotHit;
+
+}
+
+void MuStoppedEventAction::SetScintillator3Momentum(G4double SetScintillator3Momentum)
+{
+    
+    fSetScintillator3Momentum = SetScintillator3Momentum;
 
 }

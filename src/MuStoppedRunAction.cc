@@ -30,6 +30,7 @@ MuStoppedRunAction::MuStoppedRunAction()
   analysisManager->CreateNtupleIColumn("GotHit1");    //column 0; 
   analysisManager->CreateNtupleIColumn("GotHit2");    //column 1; 
   analysisManager->CreateNtupleIColumn("GotHit3");    //column 2; 
+  analysisManager->CreateNtupleDColumn("fMomentum");    //column 3; 
   analysisManager->FinishNtuple(4);
 
 

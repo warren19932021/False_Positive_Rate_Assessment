@@ -16,12 +16,14 @@ class MuStoppedEventAction : public G4UserEventAction
    void SetScintillator1GotHit(G4int Scintillator1GotHit); 
    void SetScintillator2GotHit(G4int Scintillator2GotHit); 
    void SetScintillator3GotHit(G4int Scintillator3GotHit); 
+   void SetScintillator3Momentum(G4double SetScintillator3Momentum);
  
  private:
 
   G4int fScintillator1GotHit;
   G4int fScintillator2GotHit;
   G4int fScintillator3GotHit;
+  G4double fSetScintillator3Momentum;
 };
 
 #endif // MUSTOPPED_EVENT_ACTION_HH
